@@ -4,9 +4,9 @@ import AllRooms from "../src/classes/AllRooms";
 import { mockFetchedRooms } from "./mock-data/index";
 
 describe("AllRooms", () => {
-  let allrooms;
+  let allRooms;
   beforeEach(() => {
-    allrooms = new AllRooms(mockFetchedRooms);
+    allRooms = new AllRooms(mockFetchedRooms);
   });
 
   it("should be a function", () => {
@@ -14,7 +14,7 @@ describe("AllRooms", () => {
   });
 
   it("should have all rooms", () => {
-    expect(allrooms.rooms).to.deep.equal([
+    expect(allRooms.rooms).to.deep.equal([
       {
         number: 1,
         roomType: "residential suite",
@@ -35,7 +35,7 @@ describe("AllRooms", () => {
   });
 
   it("should find room by number", () => {
-    expect(allrooms.findRoomByNumber(1)).to.deep.equal({
+    expect(allRooms.findRoomByNumber(1)).to.deep.equal({
       number: 1,
       roomType: "residential suite",
       bidet: true,
@@ -43,7 +43,7 @@ describe("AllRooms", () => {
       numBeds: 1,
       costPerNight: 358.4,
     });
-    expect(allrooms.findRoomByNumber(2)).to.deep.equal({
+    expect(allRooms.findRoomByNumber(2)).to.deep.equal({
       number: 2,
       roomType: "suite",
       bidet: false,
