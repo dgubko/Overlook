@@ -30,6 +30,30 @@ export const mockFetchedBookings = [
     date: "2022/01/25",
     roomNumber: 2,
   },
+  {
+    id: "5fwrgu4i7k55hl6t8",
+    userID: 1,
+    date: "2022/02/05",
+    roomNumber: 1,
+  },
+  {
+    id: "5fwrgu4i7k55hl6x8",
+    userID: 1,
+    date: "2023/01/11",
+    roomNumber: 2,
+  },
+  {
+    id: "5fwrgu4i7k55hl6uf",
+    userID: 2,
+    date: "2023/01/09",
+    roomNumber: 1,
+  },
+  {
+    id: "5fwrgu4i7k55hl6uy",
+    userID: 2,
+    date: "2023/01/24",
+    roomNumber: 2,
+  },
 ];
 
 export const mockFetchedCustomer = [
@@ -40,5 +64,35 @@ export const mockFetchedCustomer = [
   {
     id: 2,
     name: "Rocio Schuster",
+  },
+];
+
+export const mockLeathaBookings = [
+  {
+    id: "5fwrgu4i7k55hl6t8",
+    userID: 1,
+    date: "2022/02/05",
+    roomNumber: 1,
+  },
+  {
+    id: "5fwrgu4i7k55hl6x8",
+    userID: 1,
+    date: "2023/01/11",
+    roomNumber: 2,
+  },
+];
+
+export const mockRocioBookings = [
+  {
+    id: "5fwrgu4i7k55hl6uf",
+    userID: 2,
+    date: "2023/01/09",
+    roomNumber: 1,
+  },
+  {
+    id: "5fwrgu4i7k55hl6uy",
+    userID: 2,
+    date: "2023/01/24",
+    roomNumber: 2,
   },
 ];
