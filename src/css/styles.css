@@ -1,3 +1,211 @@
 body {
-  background: radial-gradient(circle, rgba(63,94,251,1) 0%, rgba(252,70,107,1) 100%);
+  margin: 0px;
+  font-family: "Jura", sans-serif;
+  font-size: 16px;
+}
+
+main {
+  margin: 32px;
+}
+
+.screen-image {
+  background: url("../images/image_processing20210903-15341-1drvnjs.png");
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  background-size: cover;
+  background-position: 0% 100%;
+  z-index: -1;
+  opacity: 0.5;
+}
+
+header {
+  background-color: #a2c7d6;
+  display: flex;
+  justify-content: space-between;
+  height: 12vh;
+  box-shadow: 0px 4x 10px 2px rgba(0, 0, 0, 0.25);
+  -webkit-box-shadow: 0px 4px 10px 2px rgba(0, 0, 0, 0.25);
+  -moz-box-shadow: 0px 4px 10px 2px rgba(0, 0, 0, 0.25);
+  padding-inline: 32px;
+}
+
+select,
+input {
+  cursor: pointer;
+  padding: 4px 8px;
+}
+
+input[type="submit"],
+button {
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-family: "Jura", sans-serif;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 8px 24px;
+  border-radius: 4px;
+  font-weight: 700;
+}
+
+input[type="submit"]:hover,
+button:hover {
+  transform: scale(1.05);
+}
+
+input[type="submit"]:active,
+button:active {
+  transform: scale(0.95);
+}
+
+button > img {
+  width: 16px;
+}
+
+input[type="submit"].primary-button,
+.primary-button {
+  background-color: #c77a4e;
+  border: 2px solid #c77a4e;
+  color: #fff;
+}
+
+.secondary-inline-button {
+  border: 2px solid #444d45;
+}
+
+.warning-button {
+  border: 2px solid #9a381e;
+}
+
+#hotel-name {
+  font-family: "Annie Use Your Telescope", cursive;
+}
+
+#user-name {
+  margin-right: 16px;
+}
+
+#my-bookings-text {
+  color: rgb(54, 127, 132);
+}
+
+header > div {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+header > div > img {
+  width: 32px;
+}
+
+.tabs {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  margin-bottom: 16px;
+}
+
+.tabs > button {
+  padding: 0;
+  padding-bottom: 8px;
+  border-bottom: 1px solid transparent;
+  border-radius: 0;
+}
+
+.tabs > button:hover {
+  border-bottom: 1px solid #000;
+  transform: scale(1);
+}
+
+.tabs > .selected {
+  color: #c77a4e;
+  border-bottom: 1px solid #c77a4e;
+}
+
+.tabs h2 {
+  margin: 0;
+}
+
+.filters {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 24px;
+}
+
+.card-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+  max-width: 100%;
+  flex-wrap: wrap;
+}
+
+.booking-card {
+  width: 20vw;
+  min-width: 300px;
+  background-color: #fff;
+  border: 1px solid rgb(54, 127, 132);
+  box-shadow: 4px 4x 12px 0 rgba(54, 127, 132, 0.25);
+  -webkit-box-shadow: 4px 4px 12px 0 rgba(54, 127, 132, 0.25);
+  -moz-box-shadow: 4px 4px 12px 0 rgba(54, 127, 132, 0.25);
+}
+
+.booking-card * {
+  margin: 0;
+}
+
+.booking-card h3 {
+  margin: 4px 0 16px;
+}
+
+.booking-card p {
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.booking-card p > img {
+  width: 16px;
+  margin-right: 4px;
+}
+
+.booking-card > img {
+  width: 100%;
+}
+
+.booking-card > div {
+  background-color: #fff;
+  padding: 16px;
+}
+
+.booking-card button {
+  margin-top: 16px;
+  margin: auto;
+}
+
+.result-message {
+  background-color: #fff;
+  padding: 16px;
+  width: 98%;
+  text-align: center;
+  font-weight: 700;
+}
+
+.result-message.error {
+  background-color: #9a381e;
+  color: #fff;
+}
+
+.result-message.success {
+  background-color: #444d45;
+  color: #fff;
+}
+
+.hidden {
+  display: none;
 }

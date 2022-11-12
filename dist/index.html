@@ -1,16 +1,115 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Webpack Starter Kit</title>
-</head>
-<body>
-  <img src="./images/turing-logo.png" alt="turing logo">
-  
-  <!-- Do not include the scripts.js or class files here - it is done by the webpack server -->
-  <script src="bundle.js"></script>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Webpack Starter Kit</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Annie+Use+Your+Telescope&family=Jura:wght@300;400;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="screen-image"></div>
+    <header>
+      <div>
+        <img src="./images/house.png" alt="Logo" />
+        <h1 id="hotel-name">SALT & SUN INN</h1>
+      </div>
+      <div>
+        <img src="./images/surfer-surfing.png" alt="user-logo" />
+        <h4 id="user-name"></h4>
+        <h3 id="total-spent"></h3>
+        <button id="make-reservation-button" class="primary-button">
+          Make reservation
+        </button>
+        <button id="logout-button" class="secondary-inline-button">
+          <img src="./images/logout.png" alt="logout" /> Logout
+        </button>
+      </div>
+    </header>
+    <main>
+      <h1 id="section-title-text">MY BOOKINGS</h1>
 
-</body>
+      <div class="tabs">
+        <button id="upcoming" class="tab-btn selected">
+          <h2>UPCOMING</h2>
+        </button>
+        <button id="past" class="tab-btn"><h2>PAST</h2></button>
+      </div>
+      <form class="filters hidden">
+        <input type="date" name="date" id="date" />
+        <select id="room-type-selector" name="room-type">
+          <option disabled selected>Room type</option>
+        </select>
+        <input type="submit" class="primary-button" value="Search room" />
+      </form>
+      <section class="card-container" id="upcoming-cards">
+        <div class="booking-card">
+          <img
+            src="./images/7aa06f9fa8cb9b6d2af25ec26c8e83e3.jpg"
+            alt="beach-room"
+          />
+          <div>
+            <h3>RESIDENTAL SUITE</h3>
+            <p>
+              <img src="./images/single-bed.png" /> <span>2 queen beds</span>
+            </p>
+            <p><img src="./images/calendar.png" /> <span>12/13/2022</span></p>
+            <p><img src="./images/price-tag.png" /> <span>$358.4</span></p>
+            <button class="warning-button">Delete</button>
+          </div>
+        </div>
+      </section>
+      <section class="card-container hidden" id="past-cards">
+        <div class="booking-card">
+          <img
+            src="./images/7aa06f9fa8cb9b6d2af25ec26c8e83e3.jpg"
+            alt="beach-room"
+          />
+          <div>
+            <h3>SUITE</h3>
+            <p>
+              <img src="./images/single-bed.png" /> <span>2 twin beds</span>
+            </p>
+            <p><img src="./images/calendar.png" /> <span>10/13/2022</span></p>
+            <p><img src="./images/price-tag.png" /> <span>$158.4</span></p>
+          </div>
+        </div>
+      </section>
+      <section class="hidden" id="make-reservation-section">
+        <p class="result-message">Please select date to search rooms</p>
+        <!-- <p class="result-message error">
+          Something went wrong! Room has not been booked.
+        </p>
+        <p class="result-message success">
+          Room has been booked successsfully.
+        </p> -->
+        <div class="card-container hidden" id="available-cards">
+          <div class="booking-card">
+            <img
+              src="./images/7aa06f9fa8cb9b6d2af25ec26c8e83e3.jpg"
+              alt="beach-room"
+            />
+            <div>
+              <h3>SUITE</h3>
+              <p>
+                <img src="./images/single-bed.png" /> <span>2 twin beds</span>
+              </p>
+              <p><img src="./images/calendar.png" /> <span>10/13/2022</span></p>
+              <p><img src="./images/price-tag.png" /> <span>$158.4</span></p>
+              <button id="logout-button" class="secondary-inline-button">
+                Book
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+    <!-- Do not include the scripts.js or class files here - it is done by the webpack server -->
+    <script src="bundle.js"></script>
+  </body>
 </html>
