@@ -13,6 +13,21 @@ class Customer {
       return booking;
     });
   }
+
+  getPastBookings() {
+    const past = this.bookings.filter((item) => {
+      return new Date(item.date).getTime() < Date.now();
+    });
+    return past;
+  }
+
+  getUpcomingBookings() {
+    const upcoming = this.bookings.filter((item) => {
+      return new Date(item.date).getTime() > Date.now();
+    });
+    return upcoming;
+  }
+
   getTotalCost() {
     const price = this.bookings.reduce((acc, item) => {
       acc += item.costPerNight;
