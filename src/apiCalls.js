@@ -41,7 +41,11 @@ export function postBooking(userID, date, roomNumber) {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({ userID, date, roomNumber }),
-  })
-    .then((response) => response.json())
-    .catch((error) => console.log(error));
+  }).then((response) => {
+    if (response.ok) {
+      return response.json();
+    } else {
+      throw Error("Something went wrong with your request.");
+    }
+  });
 }

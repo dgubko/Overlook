@@ -23,6 +23,7 @@ import {
 import Customer from "./classes/Customer";
 import AllBookings from "./classes/AllBookings";
 import AllRooms from "./classes/AllRooms";
+import Booking from "./classes/Booking";
 
 // GLOBAL VAR
 
@@ -89,10 +90,18 @@ function showAvailableRooms(event) {
 }
 
 function bookRoom(event) {
-  const roomNumber = event.target.closest(".booking-card").id;
-  postBooking(customer.id, searchDate, Number(roomNumber)).then((data) => {
-    console.log(data);
-  });
+  const bookingCard = event.target.closest(".booking-card");
+  const roomNumber = Number(bookingCard.id);
+  postBooking(customer.id, searchDate, roomNumber)
+    .then((data) => {
+      showSuccessMessage(data.message);
+      allBookings.bookings.push(data.newBooking);
+      const foundRoom = allRooms.findRoomByNumber(roomNumber);
+      const booking = new Booking(data.newBooking, foundRoom);
+      customer.bookings.push(booking);
+      bookingCard.remove();
+    })
+    .catch((error) => showErrorMessage(error));
 }
 
 // FUNCTIONS DATA
@@ -260,5 +269,29 @@ function renderPastBookings(pastBookings) {
 
 function showMessage(text) {
   resultMessageHTML.classList.remove("hidden");
+  resultMessageHTML.classList.remove("error");
+  resultMessageHTML.classList.remove("success");
   resultMessageHTML.innerText = text;
+}
+
+function showSuccessMessage(text) {
+  resultMessageHTML.classList.remove("hidden");
+  resultMessageHTML.classList.remove("error");
+  resultMessageHTML.classList.add("success");
+  resultMessageHTML.innerText = text;
+  setTimeout(() => {
+    resultMessageHTML.classList.add("hidden");
+    resultMessageHTML.classList.remove("success");
+  }, 3000);
+}
+
+function showErrorMessage(text) {
+  resultMessageHTML.classList.remove("hidden");
+  resultMessageHTML.classList.add("error");
+  resultMessageHTML.classList.remove("success");
+  resultMessageHTML.innerText = text;
+  setTimeout(() => {
+    resultMessageHTML.classList.add("hidden");
+    resultMessageHTML.classList.remove("error");
+  }, 3000);
 }
