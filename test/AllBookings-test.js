@@ -25,4 +25,8 @@ describe("AllBookings", () => {
     expect(allBookings.getUserBookings(1)).to.deep.equal(mockLeathaBookings);
     expect(allBookings.getUserBookings(2)).to.deep.equal(mockRocioBookings);
   });
+
+  it("should return occupated rooms by given date", () => {
+    expect(allBookings.getOccupiedRooms("2022-02-13")).to.deep.equal([1]);
+  });
 });
