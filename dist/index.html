@@ -43,7 +43,7 @@
       <form class="filters hidden">
         <input type="date" name="date" id="date" />
         <select id="room-type-selector" name="room-type">
-          <option disabled selected>Room type</option>
+          <option selected value="all">All room types</option>
         </select>
         <input type="submit" class="primary-button" value="Search room" />
       </form>
@@ -88,25 +88,7 @@
         <p class="result-message success">
           Room has been booked successsfully.
         </p> -->
-        <div class="card-container hidden" id="available-cards">
-          <div class="booking-card">
-            <img
-              src="./images/7aa06f9fa8cb9b6d2af25ec26c8e83e3.jpg"
-              alt="beach-room"
-            />
-            <div>
-              <h3>SUITE</h3>
-              <p>
-                <img src="./images/single-bed.png" /> <span>2 twin beds</span>
-              </p>
-              <p><img src="./images/calendar.png" /> <span>10/13/2022</span></p>
-              <p><img src="./images/price-tag.png" /> <span>$158.4</span></p>
-              <button id="logout-button" class="secondary-inline-button">
-                Book
-              </button>
-            </div>
-          </div>
-        </div>
+        <div class="card-container hidden" id="available-cards"></div>
       </section>
     </main>
     <!-- Do not include the scripts.js or class files here - it is done by the webpack server -->

@@ -33,3 +33,19 @@ export function getCustomer(id) {
     }
   );
 }
+
+export function postBooking(userID, date, roomNumber) {
+  return fetch("http://localhost:3001/api/v1/bookings", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ userID, date, roomNumber }),
+  }).then((response) => {
+    if (response.ok) {
+      return response.json();
+    } else {
+      throw Error("Something went wrong with your request.");
+    }
+  });
+}

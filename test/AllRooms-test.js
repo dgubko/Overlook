@@ -52,4 +52,24 @@ describe("AllRooms", () => {
       costPerNight: 477.38,
     });
   });
+
+  it("should get all available rooms", () => {
+    expect(allRooms.getAvailableRooms([1])).to.deep.equal([
+      {
+        number: 2,
+        roomType: "suite",
+        bidet: false,
+        bedSize: "full",
+        numBeds: 2,
+        costPerNight: 477.38,
+      },
+    ]);
+  });
+
+  it("should bet all roomtypes", () => {
+    expect(allRooms.getAllRoomTypes()).to.deep.equal([
+      "residential suite",
+      "suite",
+    ]);
+  });
 });
