@@ -21,8 +21,8 @@
       </div>
       <div>
         <img src="./images/surfer-surfing.png" alt="user-logo" />
-        <h4 id="user-name"></h4>
-        <h3 id="total-spent"></h3>
+        <p id="user-name"></p>
+        <p id="total-spent"></p>
         <button id="make-reservation-button" class="primary-button">
           Make reservation
         </button>
@@ -47,47 +47,10 @@
         </select>
         <input type="submit" class="primary-button" value="Search room" />
       </form>
-      <section class="card-container" id="upcoming-cards">
-        <div class="booking-card">
-          <img
-            src="./images/7aa06f9fa8cb9b6d2af25ec26c8e83e3.jpg"
-            alt="beach-room"
-          />
-          <div>
-            <h3>RESIDENTAL SUITE</h3>
-            <p>
-              <img src="./images/single-bed.png" /> <span>2 queen beds</span>
-            </p>
-            <p><img src="./images/calendar.png" /> <span>12/13/2022</span></p>
-            <p><img src="./images/price-tag.png" /> <span>$358.4</span></p>
-            <button class="warning-button">Delete</button>
-          </div>
-        </div>
-      </section>
-      <section class="card-container hidden" id="past-cards">
-        <div class="booking-card">
-          <img
-            src="./images/7aa06f9fa8cb9b6d2af25ec26c8e83e3.jpg"
-            alt="beach-room"
-          />
-          <div>
-            <h3>SUITE</h3>
-            <p>
-              <img src="./images/single-bed.png" /> <span>2 twin beds</span>
-            </p>
-            <p><img src="./images/calendar.png" /> <span>10/13/2022</span></p>
-            <p><img src="./images/price-tag.png" /> <span>$158.4</span></p>
-          </div>
-        </div>
-      </section>
+      <section class="card-container" id="upcoming-cards"></section>
+      <section class="card-container hidden" id="past-cards"></section>
       <section class="hidden" id="make-reservation-section">
         <p class="result-message">Please select date to search rooms</p>
-        <!-- <p class="result-message error">
-          Something went wrong! Room has not been booked.
-        </p>
-        <p class="result-message success">
-          Room has been booked successsfully.
-        </p> -->
         <div class="card-container hidden" id="available-cards"></div>
       </section>
     </main>
