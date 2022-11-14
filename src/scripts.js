@@ -171,9 +171,13 @@ function renderCard(item) {
 <div>
   <h3>${item.roomType.toUpperCase()}</h3>
   <p>
-    <img src="./images/single-bed.png" /> <span>${item.bedSize} bed</span>
+    <img src="./images/single-bed.png" alt="single bed"/> <span>${
+      item.bedSize
+    } bed</span>
   </p>
-  <p><img src="./images/price-tag.png" /> <span>$${item.costPerNight}</span></p>
+  <p><img src="./images/price-tag.png" alt="price tag"/> <span>$${
+    item.costPerNight
+  }</span></p>
   <button class="secondary-inline-button">Book</button>
 </div>`;
   bookingCard
@@ -227,12 +231,14 @@ function renderUpcomingBookings(upcomingBookings) {
         <div>
           <h3>${item.roomType.toUpperCase()}</h3>
           <p>
-            <img src="./images/single-bed.png" /> <span>${
+            <img src="./images/single-bed.png" alt="single bed" /> <span>${
               item.bedSize
             } bed</span>
           </p>
-          <p><img src="./images/calendar.png" /> <span>${item.date}</span></p>
-          <p><img src="./images/price-tag.png" /> <span>$${
+          <p><img src="./images/calendar.png" alt="tag" /> <span>${
+            item.date
+          }</span></p>
+          <p><img src="./images/price-tag.png" alt="price tag" /> <span>$${
             item.costPerNight
           }</span></p>
           <button class="warning-button">Delete</button>
@@ -252,14 +258,14 @@ function renderPastBookings(pastBookings) {
             <div>
               <h3>${item.roomType.toUpperCase()}</h3>
               <p>
-                <img src="./images/single-bed.png" /> <span>${
+                <img src="./images/single-bed.png" alt="single bed" /> <span>${
                   item.bedSize
                 } bed</span>
               </p>
-              <p><img src="./images/calendar.png" /> <span>${
+              <p><img src="./images/calendar.png" alt="calendar" /> <span>${
                 item.date
               }</span></p>
-              <p><img src="./images/price-tag.png" /> <span>$${
+              <p><img src="./images/price-tag.png" alt="price tag" /> <span>$${
                 item.costPerNight
               }</span></p>
             </div>

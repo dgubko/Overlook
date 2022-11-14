@@ -68,8 +68,8 @@ button > img {
 
 input[type="submit"].primary-button,
 .primary-button {
-  background-color: #c77a4e;
-  border: 2px solid #c77a4e;
+  background-color: #976041;
+  border: 2px solid #976041;
   color: #fff;
 }
 
@@ -87,6 +87,8 @@ input[type="submit"].primary-button,
 
 #user-name {
   margin-right: 16px;
+  font-size: 24px;
+  font-weight: 700;
 }
 
 #my-bookings-text {
@@ -101,6 +103,11 @@ header > div {
 
 header > div > img {
   width: 32px;
+}
+
+#total-spent {
+  font-size: 24px;
+  font-weight: 700;
 }
 
 .tabs {
