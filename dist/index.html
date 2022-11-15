@@ -19,7 +19,7 @@
         <img src="./images/house.png" alt="Logo" />
         <h1 id="hotel-name">SALT & SUN INN</h1>
       </div>
-      <div>
+      <div class="user-info hidden">
         <img src="./images/surfer-surfing.png" alt="user-logo" />
         <p id="user-name"></p>
         <p id="total-spent"></p>
@@ -31,7 +31,21 @@
         </button>
       </div>
     </header>
-    <main>
+    <main class="login-screen">
+      <form class="login-form">
+        <h1>Login to your account</h1>
+        <p class="result-message hidden">Your name or password is wrong</p>
+        <input type="text" name="username" placeholder="Enter your user name" />
+        <input
+          type="password"
+          name="password"
+          placeholder="Enter your password"
+          value="overlook2021"
+        />
+        <input type="submit" value="Login" class="primary-button" />
+      </form>
+    </main>
+    <main class="dashboard hidden">
       <h1 id="section-title-text">MY BOOKINGS</h1>
 
       <div class="tabs">

@@ -12,11 +12,13 @@ import {
 
 describe("Customer", () => {
   let customer, customer2, allRooms;
+
   beforeEach(() => {
     customer = new Customer(mockFetchedCustomer[0], mockLeathaBookings);
     customer2 = new Customer(mockFetchedCustomer[1], mockRocioBookings);
     allRooms = new AllRooms(mockFetchedRooms);
   });
+
   it("should be a function", () => {
     expect(Customer).to.be.a("function");
   });
@@ -57,13 +59,73 @@ describe("Customer", () => {
     expect(customer2.bookings[0]).to.deep.equal({
       id: "5fwrgu4i7k55hl6uf",
       userID: 2,
-      date: "2023/01/09",
+      date: "2022/01/09",
       roomNumber: 1,
       roomType: "residential suite",
       bidet: true,
       bedSize: "queen",
       costPerNight: 358.4,
     });
+  });
+
+  it("should return past bookings", () => {
+    customer.retrieveBookings(allRooms);
+    expect(customer.getPastBookings()).to.deep.equal([
+      {
+        id: "5fwrgu4i7k55hl6t8",
+        userID: 1,
+        date: "2022/02/05",
+        roomNumber: 1,
+        roomType: "residential suite",
+        bidet: true,
+        bedSize: "queen",
+        costPerNight: 358.4,
+      },
+    ]);
+
+    customer2.retrieveBookings(allRooms);
+    expect(customer2.getPastBookings()).to.deep.equal([
+      {
+        id: "5fwrgu4i7k55hl6uf",
+        userID: 2,
+        date: "2022/01/09",
+        roomNumber: 1,
+        roomType: "residential suite",
+        bidet: true,
+        bedSize: "queen",
+        costPerNight: 358.4,
+      },
+    ]);
+  });
+
+  it("should return upcoming bookings", () => {
+    customer.retrieveBookings(allRooms);
+    expect(customer.getUpcomingBookings()).to.deep.equal([
+      {
+        id: "5fwrgu4i7k55hl6x8",
+        userID: 1,
+        date: "2130/01/11",
+        roomNumber: 2,
+        roomType: "suite",
+        bidet: false,
+        bedSize: "full",
+        costPerNight: 477.38,
+      },
+    ]);
+
+    customer2.retrieveBookings(allRooms);
+    expect(customer2.getUpcomingBookings()).to.deep.equal([
+      {
+        id: "5fwrgu4i7k55hl6uy",
+        userID: 2,
+        date: "2130/01/24",
+        roomNumber: 2,
+        roomType: "suite",
+        bidet: false,
+        bedSize: "full",
+        costPerNight: 477.38,
+      },
+    ]);
   });
 
   it("should have totla cost per night", () => {
