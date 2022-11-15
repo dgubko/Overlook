@@ -50,21 +50,30 @@ const availableForReservationSection =
   document.querySelector("#available-cards");
 const roomTypeSelectorHTML = document.querySelector("#room-type-selector");
 const filtersForm = document.querySelector(".filters");
-const resultMessageHTML = document.querySelector(".result-message");
+const resultMessageHTML = document.querySelector(".dashboard .result-message");
+const resultMessageLogin = document.querySelector(
+  ".login-form .result-message"
+);
+const userLoginForm = document.querySelector(".login-form");
+const loginScreen = document.querySelector(".login-screen");
+const mainDashboard = document.querySelector(".dashboard");
+const userBlock = document.querySelector(".user-info");
+const logoutButton = document.querySelector("#logout-button");
 
 // EVENTLISTENERS
 
 filtersForm.addEventListener("submit", showAvailableRooms);
-
-window.addEventListener("load", load);
+userLoginForm.addEventListener("submit", authorizeUser);
+// window.addEventListener("load", load);
 pastButton.addEventListener("click", showPastBookings);
 upcomingButton.addEventListener("click", showUpcomingBookings);
 makeReservationButton.addEventListener("click", makeReservation);
+logoutButton.addEventListener("click", logoutSession);
 
 // EVENT HANDLERS
 
-function load() {
-  Promise.all([getAllRooms(), getAllBookings(), getCustomer(3)]).then(
+function load(userId) {
+  Promise.all([getAllRooms(), getAllBookings(), getCustomer(userId)]).then(
     (data) => {
       allRooms = new AllRooms(data[0]);
       allBookings = new AllBookings(data[1]);
@@ -74,6 +83,21 @@ function load() {
       loadCustomerDashboard();
     }
   );
+}
+
+function authorizeUser(event) {
+  event.preventDefault();
+  const userName = event.target.elements.username.value;
+  const password = event.target.elements.password.value;
+  const userId = Number(userName.slice(8, 10));
+  if (!userName && !password) {
+    return showLoginErrorMessage("Enter user name and password");
+  } else if (!userName || !userName.startsWith("customer") || isNaN(userId)) {
+    return showLoginErrorMessage("Enter correct user name");
+  } else if (!password || password !== "overlook2021") {
+    return showLoginErrorMessage("Enter correct password");
+  }
+  load(userId);
 }
 
 function showAvailableRooms(event) {
@@ -104,6 +128,18 @@ function bookRoom(event) {
     .catch((error) => showErrorMessage(error));
 }
 
+function logoutSession() {
+  userBlock.classList.add("hidden");
+  mainDashboard.classList.add("hidden");
+  loginScreen.classList.remove("hidden");
+  customer = undefined;
+  searchDate = undefined;
+  pastCardsSection.innerHTML = "";
+  upcomingCardsSection.innerHTML = "";
+  roomTypeSelectorHTML.innerHTML = "";
+  availableForReservationSection.innerHTML = "";
+}
+
 // FUNCTIONS DATA
 
 function makeRoomSearch(dateValue, roomTypeValue) {
@@ -116,11 +152,14 @@ function makeRoomSearch(dateValue, roomTypeValue) {
 }
 
 function loadCustomerDashboard() {
+  loginScreen.classList.add("hidden");
+  mainDashboard.classList.remove("hidden");
+  userBlock.classList.remove("hidden");
   const pastBookings = customer.getPastBookings();
   const upcomingBookings = customer.getUpcomingBookings();
   renderUpcomingBookings(upcomingBookings);
   renderPastBookings(pastBookings);
-  totalSpent.innerText = `$${customer.getTotalCost()}`;
+  totalSpent.innerText = `$${customer.getTotalCost().toFixed(2)}`;
   userNameHTML.innerText = customer.name;
   setMinDate();
 }
@@ -299,5 +338,16 @@ function showErrorMessage(text) {
   setTimeout(() => {
     resultMessageHTML.classList.add("hidden");
     resultMessageHTML.classList.remove("error");
+  }, 3000);
+}
+
+function showLoginErrorMessage(text) {
+  resultMessageLogin.classList.remove("hidden");
+  resultMessageLogin.classList.add("error");
+  resultMessageLogin.classList.remove("success");
+  resultMessageLogin.innerText = text;
+  setTimeout(() => {
+    resultMessageLogin.classList.add("hidden");
+    resultMessageLogin.classList.remove("error");
   }, 3000);
 }
