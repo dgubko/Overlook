@@ -7,7 +7,6 @@ Overlook is a hotel management tool for hotel customers and staff to manage room
 <img width="1430" alt="Screenshot 2022-11-15 at 10 59 31 AM" src="https://user-images.githubusercontent.com/105132801/201992771-cd6028ec-b23b-4cdf-8d37-a57311bd41a7.png">
 
 
-Overlook is a hotel management tool for hotel customers and staff to manage room bookings and calculate customer bills. Customers can see their own past and future bookings, total spent amount for all time or reserve a new room.
 ### Goals and Objectives
 
 - Use OOP to drive the design of the application and the code
