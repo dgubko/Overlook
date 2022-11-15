@@ -34,6 +34,11 @@ describe("AllRooms", () => {
     ]);
   });
 
+  it("should have rooms as an empty array ", () => {
+    const allRooms = new AllRooms();
+    expect(allRooms.rooms).to.deep.equal([]);
+  });
+
   it("should find room by number", () => {
     expect(allRooms.findRoomByNumber(1)).to.deep.equal({
       number: 1,
@@ -53,6 +58,10 @@ describe("AllRooms", () => {
     });
   });
 
+  it("should return undefined if nothing to show", () => {
+    expect(allRooms.findRoomByNumber(10)).to.equal(undefined);
+  });
+
   it("should get all available rooms", () => {
     expect(allRooms.getAvailableRooms([1])).to.deep.equal([
       {
@@ -64,6 +73,10 @@ describe("AllRooms", () => {
         costPerNight: 477.38,
       },
     ]);
+  });
+
+  it("should return an empty array if no available room", () => {
+    expect(allRooms.getAvailableRooms([1, 2])).to.deep.equal([]);
   });
 
   it("should bet all roomtypes", () => {

@@ -5,7 +5,9 @@ body {
 }
 
 main {
-  margin: 32px;
+  margin: auto;
+  padding: 32px;
+  max-width: 1400px;
 }
 
 .screen-image {
@@ -25,11 +27,52 @@ header {
   background-color: #a2c7d6;
   display: flex;
   justify-content: space-between;
-  height: 12vh;
   box-shadow: 0px 4x 10px 2px rgba(0, 0, 0, 0.25);
   -webkit-box-shadow: 0px 4px 10px 2px rgba(0, 0, 0, 0.25);
   -moz-box-shadow: 0px 4px 10px 2px rgba(0, 0, 0, 0.25);
-  padding-inline: 32px;
+  padding: 16px 32px;
+}
+
+header h1,
+header p {
+  margin: 0;
+}
+
+header > div {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.user-info {
+  gap: 16px;
+}
+
+.user-info > div {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+header img {
+  width: 32px;
+}
+
+.login-screen {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 70vh;
+}
+
+.login-form {
+  background-color: white;
+  border: 1px solid #a2c7d6;
+  padding: 80px 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
 }
 
 select,
@@ -87,22 +130,12 @@ input[type="submit"].primary-button,
 
 #user-name {
   margin-right: 16px;
-  font-size: 24px;
+  font-size: 20px;
   font-weight: 700;
 }
 
 #my-bookings-text {
   color: rgb(54, 127, 132);
-}
-
-header > div {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-header > div > img {
-  width: 32px;
 }
 
 #total-spent {
@@ -153,8 +186,8 @@ header > div > img {
 }
 
 .booking-card {
-  width: 20vw;
-  min-width: 300px;
+  width: 100%;
+  min-width: 180px;
   background-color: #fff;
   border: 1px solid rgb(54, 127, 132);
   box-shadow: 4px 4x 12px 0 rgba(54, 127, 132, 0.25);
@@ -215,4 +248,65 @@ header > div > img {
 
 .hidden {
   display: none;
+}
+
+@media (max-width: 946px) {
+  .user-info {
+    flex-direction: column;
+    justify-content: center;
+    gap: 4px;
+  }
+
+  .user-info * {
+    margin: 0;
+  }
+
+  .card-container {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 660px) {
+  header {
+    align-items: center;
+    flex-direction: column;
+  }
+
+  .card-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .filters {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+@media (max-width: 462px) {
+  header {
+    gap: 8px;
+  }
+
+  header h1,
+  #user-name,
+  #total-spent {
+    font-size: 16px;
+  }
+
+  .user-info img {
+    display: none;
+  }
+
+  .user-info button {
+    padding: 4px 8px;
+  }
+
+  .card-container {
+    grid-template-columns: 1fr;
+  }
+
+  #section-title-text,
+  .login-form h1 {
+    font-size: 20px;
+  }
 }

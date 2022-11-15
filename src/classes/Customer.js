@@ -6,6 +6,7 @@ class Customer {
     this.name = fetchedCustomer.name;
     this.bookings = filteredBookings;
   }
+
   retrieveBookings(allRooms) {
     this.bookings = this.bookings.map((item) => {
       const foundRoom = allRooms.findRoomByNumber(item.roomNumber);

@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Webpack Starter Kit</title>
+    <title>Salt & Sun Inn</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -19,19 +19,37 @@
         <img src="./images/house.png" alt="Logo" />
         <h1 id="hotel-name">SALT & SUN INN</h1>
       </div>
-      <div>
-        <img src="./images/surfer-surfing.png" alt="user-logo" />
-        <p id="user-name"></p>
-        <p id="total-spent"></p>
-        <button id="make-reservation-button" class="primary-button">
-          Make reservation
-        </button>
-        <button id="logout-button" class="secondary-inline-button">
-          <img src="./images/logout.png" alt="logout" /> Logout
-        </button>
+      <div class="user-info hidden">
+        <div>
+          <img src="./images/surfer-surfing.png" alt="user-logo" />
+          <p id="user-name"></p>
+          <p id="total-spent"></p>
+        </div>
+        <div>
+          <button id="make-reservation-button" class="primary-button">
+            Make reservation
+          </button>
+          <button id="logout-button" class="secondary-inline-button">
+            <img src="./images/logout.png" alt="logout" /> Logout
+          </button>
+        </div>
       </div>
     </header>
-    <main>
+    <main class="login-screen">
+      <form class="login-form">
+        <h1>Login to your account</h1>
+        <p class="result-message hidden">Your name or password is wrong</p>
+        <input type="text" name="username" placeholder="Enter your user name" />
+        <input
+          type="password"
+          name="password"
+          placeholder="Enter your password"
+          value="overlook2021"
+        />
+        <input type="submit" value="Login" class="primary-button" />
+      </form>
+    </main>
+    <main class="dashboard hidden">
       <h1 id="section-title-text">MY BOOKINGS</h1>
 
       <div class="tabs">
@@ -46,6 +64,13 @@
           <option selected value="all">All room types</option>
         </select>
         <input type="submit" class="primary-button" value="Search room" />
+        <button
+          type="button"
+          class="secondary-inline-button"
+          id="go-back-to-bookings-button"
+        >
+          Go back
+        </button>
       </form>
       <section class="card-container" id="upcoming-cards"></section>
       <section class="card-container hidden" id="past-cards"></section>

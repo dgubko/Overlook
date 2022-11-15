@@ -39,19 +39,19 @@ export const mockFetchedBookings = [
   {
     id: "5fwrgu4i7k55hl6x8",
     userID: 1,
-    date: "2023/01/11",
+    date: "2130/01/11",
     roomNumber: 2,
   },
   {
     id: "5fwrgu4i7k55hl6uf",
     userID: 2,
-    date: "2023/01/09",
+    date: "2022/01/09",
     roomNumber: 1,
   },
   {
     id: "5fwrgu4i7k55hl6uy",
     userID: 2,
-    date: "2023/01/24",
+    date: "2130/01/24",
     roomNumber: 2,
   },
 ];
@@ -77,7 +77,7 @@ export const mockLeathaBookings = [
   {
     id: "5fwrgu4i7k55hl6x8",
     userID: 1,
-    date: "2023/01/11",
+    date: "2130/01/11",
     roomNumber: 2,
   },
 ];
@@ -86,13 +86,13 @@ export const mockRocioBookings = [
   {
     id: "5fwrgu4i7k55hl6uf",
     userID: 2,
-    date: "2023/01/09",
+    date: "2022/01/09",
     roomNumber: 1,
   },
   {
     id: "5fwrgu4i7k55hl6uy",
     userID: 2,
-    date: "2023/01/24",
+    date: "2130/01/24",
     roomNumber: 2,
   },
 ];
