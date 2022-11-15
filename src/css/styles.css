@@ -32,6 +32,23 @@ header {
   padding-inline: 32px;
 }
 
+.login-screen {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 70vh;
+}
+
+.login-form {
+  background-color: white;
+  border: 1px solid #a2c7d6;
+  padding: 80px 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
 select,
 input {
   cursor: pointer;
