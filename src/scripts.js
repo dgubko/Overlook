@@ -30,60 +30,54 @@ import Booking from "./classes/Booking";
 let customer, allBookings, allRooms, searchDate;
 
 // QUERYSELECTORS
-
-const userNameHTML = document.querySelector("#user-name");
-const upcomingButton = document.querySelector("#upcoming");
-const pastButton = document.querySelector("#past");
+// sections
+const loginScreen = document.querySelector(".login-screen");
+const mainDashboard = document.querySelector(".dashboard");
 const upcomingCardsSection = document.querySelector("#upcoming-cards");
 const pastCardsSection = document.querySelector("#past-cards");
-const makeReservationButton = document.querySelector(
-  "#make-reservation-button"
-);
-const sectionTitleText = document.querySelector("#section-title-text");
-const totalSpent = document.querySelector("#total-spent");
-const tabButtons = document.querySelector(".tabs");
 const makeReservationSection = document.querySelector(
   "#make-reservation-section"
 );
-const datePicker = document.querySelector("#date");
 const availableForReservationSection =
   document.querySelector("#available-cards");
-const roomTypeSelectorHTML = document.querySelector("#room-type-selector");
+// elements
+const userBlock = document.querySelector(".user-info");
+const userNameHTML = document.querySelector("#user-name");
+const totalSpent = document.querySelector("#total-spent");
+const sectionTitleText = document.querySelector("#section-title-text");
+const tabButtons = document.querySelector(".tabs");
+// forms
 const filtersForm = document.querySelector(".filters");
+const userLoginForm = document.querySelector(".login-form");
+const datePicker = document.querySelector("#date");
+const roomTypeSelectorHTML = document.querySelector("#room-type-selector");
+// messages
 const resultMessageHTML = document.querySelector(".dashboard .result-message");
 const resultMessageLogin = document.querySelector(
   ".login-form .result-message"
 );
-const userLoginForm = document.querySelector(".login-form");
-const loginScreen = document.querySelector(".login-screen");
-const mainDashboard = document.querySelector(".dashboard");
-const userBlock = document.querySelector(".user-info");
+// buttons
+const makeReservationButton = document.querySelector(
+  "#make-reservation-button"
+);
+const upcomingButton = document.querySelector("#upcoming");
+const pastButton = document.querySelector("#past");
 const logoutButton = document.querySelector("#logout-button");
+const goBackToBookingsButton = document.querySelector(
+  "#go-back-to-bookings-button"
+);
 
 // EVENTLISTENERS
 
-filtersForm.addEventListener("submit", showAvailableRooms);
-userLoginForm.addEventListener("submit", authorizeUser);
-// window.addEventListener("load", load);
 pastButton.addEventListener("click", showPastBookings);
 upcomingButton.addEventListener("click", showUpcomingBookings);
 makeReservationButton.addEventListener("click", makeReservation);
+goBackToBookingsButton.addEventListener("click", goBackToBookings);
+filtersForm.addEventListener("submit", showAvailableRooms);
+userLoginForm.addEventListener("submit", authorizeUser);
 logoutButton.addEventListener("click", logoutSession);
 
 // EVENT HANDLERS
-
-function load(userId) {
-  Promise.all([getAllRooms(), getAllBookings(), getCustomer(userId)]).then(
-    (data) => {
-      allRooms = new AllRooms(data[0]);
-      allBookings = new AllBookings(data[1]);
-      const filteredBookings = allBookings.getUserBookings(data[2].id);
-      customer = new Customer(data[2], filteredBookings);
-      customer.retrieveBookings(allRooms);
-      loadCustomerDashboard();
-    }
-  );
-}
 
 function authorizeUser(event) {
   event.preventDefault();
@@ -124,11 +118,19 @@ function bookRoom(event) {
       const booking = new Booking(data.newBooking, foundRoom);
       customer.bookings.push(booking);
       bookingCard.remove();
+      const updatedUpcomingBookings = customer.getUpcomingBookings();
+      renderUpcomingBookings(updatedUpcomingBookings);
     })
     .catch((error) => showErrorMessage(error));
 }
 
+function goBackToBookings() {
+  cleanReservation();
+  showCustomerBookings();
+}
+
 function logoutSession() {
+  pastCardsSection.classList.add("hidden");
   userBlock.classList.add("hidden");
   mainDashboard.classList.add("hidden");
   loginScreen.classList.remove("hidden");
@@ -137,10 +139,22 @@ function logoutSession() {
   pastCardsSection.innerHTML = "";
   upcomingCardsSection.innerHTML = "";
   roomTypeSelectorHTML.innerHTML = "";
-  availableForReservationSection.innerHTML = "";
+  cleanReservation();
 }
 
 // FUNCTIONS DATA
+function load(userId) {
+  Promise.all([getAllRooms(), getAllBookings(), getCustomer(userId)]).then(
+    (data) => {
+      allRooms = new AllRooms(data[0]);
+      allBookings = new AllBookings(data[1]);
+      const filteredBookings = allBookings.getUserBookings(data[2].id);
+      customer = new Customer(data[2], filteredBookings);
+      customer.retrieveBookings(allRooms);
+      loadCustomerDashboard();
+    }
+  );
+}
 
 function makeRoomSearch(dateValue, roomTypeValue) {
   const occupied = allBookings.getOccupiedRooms(dateValue);
@@ -162,6 +176,7 @@ function loadCustomerDashboard() {
   totalSpent.innerText = `$${customer.getTotalCost().toFixed(2)}`;
   userNameHTML.innerText = customer.name;
   setMinDate();
+  showCustomerBookings();
 }
 
 function getMinDate() {
@@ -185,15 +200,15 @@ function setMinDate() {
 }
 
 function renderAvailableRooms(available) {
+  availableForReservationSection.innerHTML = "";
   if (!available.length) {
-    showMessage(
-      "Sorry, we could not find anything for your search. Please select another date or room type."
-    );
+    const text =
+      "Sorry, we could not find anything for your search. Please select another date or room type.";
+    showMessage(text);
     return;
   }
   resultMessageHTML.classList.add("hidden");
   availableForReservationSection.classList.remove("hidden");
-  availableForReservationSection.innerHTML = "";
   available.forEach((item) => {
     availableForReservationSection.appendChild(renderCard(item));
   });
@@ -203,22 +218,23 @@ function renderCard(item) {
   const bookingCard = document.createElement("div");
   bookingCard.classList.add("booking-card");
   bookingCard.id = item.number;
-  bookingCard.innerHTML = `<img
-  src="./images/7aa06f9fa8cb9b6d2af25ec26c8e83e3.jpg"
-  alt="beach-room"
-/>
-<div>
-  <h3>${item.roomType.toUpperCase()}</h3>
-  <p>
-    <img src="./images/single-bed.png" alt="single bed"/> <span>${
-      item.bedSize
-    } bed</span>
-  </p>
-  <p><img src="./images/price-tag.png" alt="price tag"/> <span>$${
-    item.costPerNight
-  }</span></p>
-  <button class="secondary-inline-button">Book</button>
-</div>`;
+  bookingCard.innerHTML = `
+    <img
+      src="./images/7aa06f9fa8cb9b6d2af25ec26c8e83e3.jpg"
+      alt="beach-room"
+    />
+    <div>
+      <h3>${item.roomType.toUpperCase()}</h3>
+      <p>
+        <img src="./images/single-bed.png" alt="single bed"/>
+        <span>${item.bedSize} bed</span>
+      </p>
+      <p>
+        <img src="./images/price-tag.png" alt="price tag"/>
+        <span>$${item.costPerNight}</span>
+      </p>
+      <button class="secondary-inline-button">Book</button>
+    </div>`;
   bookingCard
     .querySelector(".secondary-inline-button")
     .addEventListener("click", bookRoom);
@@ -260,9 +276,8 @@ function renderRoomType() {
 function renderUpcomingBookings(upcomingBookings) {
   upcomingCardsSection.innerHTML = "";
   upcomingBookings.forEach((item) => {
-    upcomingCardsSection.innerHTML += `<div class="booking-card" id="${
-      item.id
-    }">
+    upcomingCardsSection.innerHTML += `
+      <div class="booking-card" id="${item.id}">
         <img
           src="./images/7aa06f9fa8cb9b6d2af25ec26c8e83e3.jpg"
           alt="beach-room"
@@ -270,17 +285,17 @@ function renderUpcomingBookings(upcomingBookings) {
         <div>
           <h3>${item.roomType.toUpperCase()}</h3>
           <p>
-            <img src="./images/single-bed.png" alt="single bed" /> <span>${
-              item.bedSize
-            } bed</span>
+            <img src="./images/single-bed.png" alt="single bed" />
+            <span>${item.bedSize} bed</span>
           </p>
-          <p><img src="./images/calendar.png" alt="tag" /> <span>${
-            item.date
-          }</span></p>
-          <p><img src="./images/price-tag.png" alt="price tag" /> <span>$${
-            item.costPerNight
-          }</span></p>
-          <button class="warning-button">Delete</button>
+          <p>
+            <img src="./images/calendar.png" alt="tag" />
+            <span>${item.date}</span>
+          </p>
+          <p>
+            <img src="./images/price-tag.png" alt="price tag" />
+            <span>$${item.costPerNight}</span>
+          </p>
         </div>
       </div>`;
   });
@@ -289,26 +304,28 @@ function renderUpcomingBookings(upcomingBookings) {
 function renderPastBookings(pastBookings) {
   pastCardsSection.innerHTML = "";
   pastBookings.forEach((item) => {
-    pastCardsSection.innerHTML += `<div class="booking-card" id="${item.id}">
-            <img
-              src="./images/7aa06f9fa8cb9b6d2af25ec26c8e83e3.jpg"
-              alt="beach-room"
-            />
-            <div>
-              <h3>${item.roomType.toUpperCase()}</h3>
-              <p>
-                <img src="./images/single-bed.png" alt="single bed" /> <span>${
-                  item.bedSize
-                } bed</span>
-              </p>
-              <p><img src="./images/calendar.png" alt="calendar" /> <span>${
-                item.date
-              }</span></p>
-              <p><img src="./images/price-tag.png" alt="price tag" /> <span>$${
-                item.costPerNight
-              }</span></p>
-            </div>
-          </div>`;
+    pastCardsSection.innerHTML += `
+    <div class="booking-card" id="${item.id}">
+      <img
+        src="./images/7aa06f9fa8cb9b6d2af25ec26c8e83e3.jpg"
+        alt="beach-room"
+      />
+      <div>
+        <h3>${item.roomType.toUpperCase()}</h3>
+        <p>
+          <img src="./images/single-bed.png" alt="single bed" />
+          <span>${item.bedSize} bed</span>
+        </p>
+        <p>
+          <img src="./images/calendar.png" alt="calendar" />
+          <span>${item.date}</span>
+        </p>
+        <p>
+        <img src="./images/price-tag.png" alt="price tag" />
+        <span>$${item.costPerNight}</span>
+        </p>
+      </div>
+    </div>`;
   });
 }
 
@@ -350,4 +367,21 @@ function showLoginErrorMessage(text) {
     resultMessageLogin.classList.add("hidden");
     resultMessageLogin.classList.remove("error");
   }, 3000);
+}
+
+function cleanReservation() {
+  datePicker.value = "";
+  roomTypeSelectorHTML.value = "all";
+  filtersForm.classList.add("hidden");
+  showMessage("Please select date to search rooms");
+  availableForReservationSection.innerHTML = "";
+  makeReservationSection.classList.add("hidden");
+  sectionTitleText.innerText = "MY BOOKINGS";
+}
+
+function showCustomerBookings() {
+  tabButtons.classList.remove("hidden");
+  upcomingCardsSection.classList.remove("hidden");
+  upcomingButton.classList.add("selected");
+  pastButton.classList.remove("selected");
 }
